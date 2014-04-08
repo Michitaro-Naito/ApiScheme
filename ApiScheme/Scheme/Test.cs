@@ -8,12 +8,31 @@ namespace ApiScheme.Scheme
 {
     public class PlusIn : In
     {
-        public int a, b;
+        /// <summary>
+        /// Calculates a + b = c.
+        /// </summary>
+        public int a;
+
+        /// <summary>
+        /// Calculates a + b = c.
+        /// </summary>
+        public int b;
+
+        /// <summary>
+        /// This string will be echoed.
+        /// </summary>
         public string echo;
     }
     public class PlusOut : Out
     {
+        /// <summary>
+        /// A result of a + b = c.
+        /// </summary>
         public int c;
+
+        /// <summary>
+        /// A result of echo.
+        /// </summary>
         public string echo;
     }
     public class PlusInvalidInn : In

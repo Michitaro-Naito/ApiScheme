@@ -49,6 +49,7 @@
     <Compile Include="Client\Api.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scheme\Api.cs" />
+    <Compile Include="Scheme\GameServer.cs" />
     <Compile Include="Scheme\Test.cs" />
     <Compile Include="Server\Api.cs" />
   </ItemGroup>

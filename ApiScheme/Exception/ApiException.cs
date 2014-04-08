@@ -44,4 +44,29 @@ namespace ApiScheme
 
         }
     }
+
+    /// <summary>
+    /// Thrown if reached the maximum of something.
+    /// eg. Max Characters per Player
+    /// </summary>
+    public class ApiMaxReachedException : ApiException
+    {
+        public ApiMaxReachedException(string message)
+            : base(message)
+        {
+
+        }
+    }
+
+    /// <summary>
+    /// Thrown if insertion failed by Index Unique Constraint.
+    /// </summary>
+    public class ApiNotUniqueException : ApiException
+    {
+        public ApiNotUniqueException(string message)
+            : base(message)
+        {
+
+        }
+    }
 }
