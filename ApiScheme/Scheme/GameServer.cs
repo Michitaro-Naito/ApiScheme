@@ -30,23 +30,25 @@ namespace ApiScheme.Scheme
     {
     }
 
-    public class AddPlayLogIn : In
+    public class PlayLogInfo
     {
+        public int id;
+        public DateTime created;
+        public string culture;
+        public string timezone;
         public string roomName;
         public string fileName;
+    }
+
+    public class AddPlayLogIn : In
+    {
+        public PlayLogInfo log;
     }
     public class AddPlayLogOut : Out
     {
 
     }
 
-    public class PlayLogInfo
-    {
-        public int id;
-        public DateTime created;
-        public string roomName;
-        public string fileName;
-    }
     public class GetPlayLogsIn : In
     {
         /// <summary>
