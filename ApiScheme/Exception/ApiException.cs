@@ -69,4 +69,22 @@ namespace ApiScheme
 
         }
     }
+
+    public class ApiOutOfRangeException : ApiException
+    {
+        public ApiOutOfRangeException(string message)
+            : base(message)
+        {
+
+        }
+    }
+
+    public class ApiBusyForNowException : ApiException
+    {
+        public ApiBusyForNowException(string message)
+            : base(message)
+        {
+
+        }
+    }
 }

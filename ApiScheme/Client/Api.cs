@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -28,6 +29,7 @@ namespace ApiScheme.Client
         /// <exception cref="System.Net.WebException">HTTP errors like 404, 500.</exception>
         /// <exception cref="ApiScheme.ApiException">Failed to call WebAPI. Returned from ApiServer. Can be derived Exceptions.</exception>
         /// <exception cref="System.Exception">Unknown errors.(Caused by bugs of this lib.)</exception>
+        [DebuggerStepThrough]
         public static T Get<T>(In request)
             where T : Out, new()
         {
