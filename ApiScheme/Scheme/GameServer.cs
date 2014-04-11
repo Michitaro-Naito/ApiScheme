@@ -7,6 +7,19 @@ using System.Threading.Tasks;
 
 namespace ApiScheme.Scheme
 {
+    public class BannedIdInfo
+    {
+        public string userId;
+    }
+    public class GetBlacklistIn : In
+    {
+        public int page;
+    }
+    public class GetBlacklistOut : Out
+    {
+        public List<BannedIdInfo> infos;
+    }
+
     public class CharacterInfo
     {
         public string userId;
@@ -125,5 +138,34 @@ namespace ApiScheme.Scheme
     public class GetPlayLogByIdOut : Out
     {
         public PlayLogInfo playLog;
+    }
+
+    public class MessageInfo
+    {
+        public string from;
+        public string role;
+        public string mode;
+        public string body;
+        public override string ToString()
+        {
+            return string.Format("[MessageInfo from:{0} role:{1} mode:{2} body:{3}]", from, role, mode, body);
+        }
+    }
+    public class ReportMessageIn : In
+    {
+        public string userId;
+        public string note;
+        public List<MessageInfo> messages;
+        public override string ToString()
+        {
+            var str = string.Format("[ReportMessageIn userId:{0} note:{1} messages:", userId, note);
+            messages.ForEach(m => str += m.ToString());
+            str += "]";
+            return str;
+        }
+    }
+    public class ReportMessageOut : Out
+    {
+
     }
 }
