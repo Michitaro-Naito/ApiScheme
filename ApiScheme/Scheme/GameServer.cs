@@ -116,7 +116,7 @@ namespace ApiScheme.Scheme
     }
     public class AddPlayLogOut : Out
     {
-
+        public int id;
     }
 
     public class GetPlayLogsIn : In
@@ -166,6 +166,5 @@ namespace ApiScheme.Scheme
     }
     public class ReportMessageOut : Out
     {
-
     }
 }
