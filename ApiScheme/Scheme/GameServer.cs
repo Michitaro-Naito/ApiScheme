@@ -168,7 +168,7 @@ namespace ApiScheme.Scheme
     {
     }
 
-    public class ReportGameServerStatusIn : In
+    public class GameServerStatus
     {
         public string host;
         public int port;
@@ -181,12 +181,29 @@ namespace ApiScheme.Scheme
 
         public override string ToString()
         {
-            return string.Format("[ReportGameServerStatusIn host:{0} port:{1} name:{2} players:{3} maxPlayers:{4} framesPerInterval:{5} reportIntervalSeconds:{6} maxElapsedSeconds:{7}]",
+            return string.Format("[GameServerStatus host:{0} port:{1} name:{2} players:{3} maxPlayers:{4} framesPerInterval:{5} reportIntervalSeconds:{6} maxElapsedSeconds:{7}]",
                 host, port, name, players, maxPlayers, framesPerInterval, reportIntervalSeconds, maxElapsedSeconds);
+        }
+    }
+    public class ReportGameServerStatusIn : In
+    {
+        public GameServerStatus status;
+        public override string ToString()
+        {
+            return string.Format("[ReportGameServerStatusIn status:{0}]", status);
         }
     }
     public class ReportGameServerStatusOut : Out
     {
 
+    }
+
+    public class GetGameServersIn : In
+    {
+
+    }
+    public class GetGameServersOut : Out
+    {
+        public List<GameServerStatus> servers;
     }
 }
