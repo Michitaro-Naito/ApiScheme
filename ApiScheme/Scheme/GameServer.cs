@@ -167,4 +167,26 @@ namespace ApiScheme.Scheme
     public class ReportMessageOut : Out
     {
     }
+
+    public class ReportGameServerStatusIn : In
+    {
+        public string host;
+        public int port;
+        public string name;
+        public int players;
+        public int maxPlayers;
+        public int framesPerInterval;
+        public double reportIntervalSeconds;
+        public double maxElapsedSeconds;
+
+        public override string ToString()
+        {
+            return string.Format("[ReportGameServerStatusIn host:{0} port:{1} name:{2} players:{3} maxPlayers:{4} framesPerInterval:{5} reportIntervalSeconds:{6} maxElapsedSeconds:{7}]",
+                host, port, name, players, maxPlayers, framesPerInterval, reportIntervalSeconds, maxElapsedSeconds);
+        }
+    }
+    public class ReportGameServerStatusOut : Out
+    {
+
+    }
 }
