@@ -206,4 +206,31 @@ namespace ApiScheme.Scheme
     {
         public List<GameServerStatus> servers;
     }
+
+    public class GetStatisticsIn : In
+    {
+
+    }
+    public class GetStatisticsOut : Out
+    {
+        /// <summary>
+        /// The number of Users.
+        /// </summary>
+        public int users;
+
+        /// <summary>
+        /// The number of Characters.
+        /// </summary>
+        public int characters;
+
+        /// <summary>
+        /// The number of current playing Users.
+        /// </summary>
+        public int playings;
+
+        /// <summary>
+        /// The number of PlayLogs.
+        /// </summary>
+        public int playlogs;
+    }
 }

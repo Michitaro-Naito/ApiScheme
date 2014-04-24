@@ -30,7 +30,7 @@ namespace ApiScheme.Client
         /// <exception cref="ApiScheme.ApiException">Failed to call WebAPI. Returned from ApiServer. Can be derived Exceptions.</exception>
         /// <exception cref="System.Exception">Unknown errors.(Caused by bugs of this lib.)</exception>
         [DebuggerStepThrough]
-        public static T Get<T>(In request)
+        public static T Request<T>(string method, In request)
             where T : Out, new()
         {
             // Valid URL?
@@ -51,7 +51,7 @@ namespace ApiScheme.Client
                 throw new ArgumentException(string.Format("ClassName not match. In:{0} Out:{1} OutRequired:{2}", inName, outName, outNameRequired));
 
             // Calls ApiServer
-            var path = "Api/Call";
+            /*var path = "Api/Call";
             var req = WebRequest.Create(apiServerUrl + path + "?name=" + name + "&json=" + HttpUtility.UrlEncode(JsonConvert.SerializeObject(request)));
             string json = null;
             try
@@ -81,6 +81,49 @@ namespace ApiScheme.Client
             catch (System.Exception e)
             {
                 throw e;
+            }*/
+
+            // New impl
+            var url = apiServerUrl + "Api/Call";
+            string json = null;
+            try
+            {
+                using (var wc = new WebClient())
+                {
+                    if (method == "GET")
+                    {
+                        var res = wc.DownloadData(url + "?name=" + name + "&json=" + HttpUtility.UrlEncode(JsonConvert.SerializeObject(request)));
+                        json = Encoding.UTF8.GetString(res);
+                    }
+                    else if (method == "POST")
+                    {
+                        var res = wc.UploadValues(url, "POST", new System.Collections.Specialized.NameValueCollection()
+                        {
+                            {"name", name},
+                            {"json", JsonConvert.SerializeObject(request)}
+                        });
+                        json = Encoding.UTF8.GetString(res);
+                    }
+                    else
+                        throw new NotImplementedException("Method not implemented");
+                }
+            }
+            catch (WebException e)
+            {
+                if (e.Response != null)
+                {
+                    using (var rs = e.Response.GetResponseStream())
+                    using (var reader = new StreamReader(rs, Encoding.UTF8))
+                    {
+                        var body = reader.ReadToEnd();
+                        throw new WebException(body);
+                    }
+                }
+                throw;
+            }
+            catch (System.Exception)
+            {
+                throw;
             }
 
             // Valid json?
@@ -94,6 +137,20 @@ namespace ApiScheme.Client
                 throw apiException;
 
             return response;
+        }
+
+        [DebuggerStepThrough]
+        public static T Get<T>(In request)
+            where T : Out, new()
+        {
+            return Request<T>("GET", request);
+        }
+
+        [DebuggerStepThrough]
+        public static T Post<T>(In request)
+            where T : Out, new()
+        {
+            return Request<T>("POST", request);
         }
     }
 }
