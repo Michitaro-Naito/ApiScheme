@@ -40,6 +40,8 @@ namespace ApiScheme.Scheme
     {
         public string userId;
         public string name;
+        public string ipAddress;
+        public string host;
     }
     public class CreateCharacterOut : Out
     {
