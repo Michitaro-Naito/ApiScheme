@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using ApiScheme.Utility;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -98,6 +99,15 @@ namespace ApiScheme.Scheme
     public class TransactionOut : Out
     {
 
+    }
+
+    public class GetCharacterItemsIn : In
+    {
+        public string characterName;
+    }
+    public class GetCharacterItemsOut : Out
+    {
+        public CharacterItems items;
     }
 
     public class PlayLogInfo
@@ -232,5 +242,61 @@ namespace ApiScheme.Scheme
         /// The number of PlayLogs.
         /// </summary>
         public int playlogs;
+    }
+
+    public class JwtSellerData
+    {
+        public string userId;
+        public string sku;
+        public double amount = 1;
+    }
+    public class PurchasableGood
+    {
+        public string sku;
+        public string name;
+        public string description;
+        public string price;
+        
+        /// <summary>
+        /// JWT, Json Web Token to buy.
+        /// </summary>
+        public string jwt;
+
+        public static PurchasableGood From(
+            string SellerId,
+            string SellerSecret,
+            string userId,
+            string sku,
+            double amount,
+            string name,
+            string description,
+            double price,
+            double? recurrencePrice,
+            string currencyCode,
+            string displayPrice)
+        {
+            return new PurchasableGood()
+            {
+                sku = sku,
+                name = name,
+                description = description,
+                price = displayPrice,
+                jwt = JwtHelper.From(SellerId, SellerSecret, userId, sku, amount, name, description, price, recurrencePrice, currencyCode)
+            };
+        }
+    }
+    public class GetPurchasableGoodsIn : In
+    {
+        /// <summary>
+        /// Buyer's UserId.
+        /// </summary>
+        public string userId;
+    }
+    public class GetPurchasableGoodsOut : Out
+    {
+        /// <summary>
+        /// Purchasable goods for a specific Player.
+        /// </summary>
+        public List<PurchasableGood> goods;
     }
 }

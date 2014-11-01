@@ -34,6 +34,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="paycircuit.com.google.iap.lib">
+      <HintPath>..\..\..\..\Desktop\Google Wallet for Digital\Bin\paycircuit.com.google.iap.lib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -52,6 +55,7 @@
     <Compile Include="Scheme\GameServer.cs" />
     <Compile Include="Scheme\Test.cs" />
     <Compile Include="Server\Api.cs" />
+    <Compile Include="Utility\JwtHelper.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
